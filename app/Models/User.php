@@ -49,4 +49,9 @@ class User extends Authenticatable
     {
         $query->where('is_admin', 0);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'user_product');
+    }
 }

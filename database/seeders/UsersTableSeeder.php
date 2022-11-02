@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Product;
 use App\Models\User;
 use Faker\Factory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -28,7 +29,7 @@ class UsersTableSeeder extends Seeder
         ]);
 
         for ($i = 0; $i < 5; $i++) {
-            User::create([
+            $user = User::create([
                 'first_name' => $faker->firstName,
                 'last_name' => $faker->lastName,
                 'email' => $faker->email,
@@ -36,6 +37,8 @@ class UsersTableSeeder extends Seeder
                 'is_admin' => '0',
                 'password' => bcrypt('12345678'),
             ]);
+
+            $user->products()->attach(Product::inRandomOrder()->first()->id);
         }
     }
 }
