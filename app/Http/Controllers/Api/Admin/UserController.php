@@ -36,6 +36,10 @@ class UserController extends Controller
             return response()->json(['data' => null, 'error' => 1, 'message' => $validator->errors()->first()], 201);
         }
 
+        $request->merge([
+            'password' => bcrypt($request['password'])
+        ]);
+
         $params = $request->except('_token');
 
         $user = User::create($params);
