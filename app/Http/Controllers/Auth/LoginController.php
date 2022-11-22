@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -36,5 +37,27 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    // If the user is an administrator redirect him to the dashboard, otherwise the user home page
+    protected function authenticated(Request $request, $user)
+    {
+        if($user->is_admin == 1) {
+            return redirect()->route('admin.index');
+        }
+        return redirect()->route('home');
+    }
+
+    // Allowed the user to Login with an email or phone number
+    public function username()
+    {
+        // get input value
+        $loginValue = request('email');
+        // check if it's an email or just a text
+        $this->value = filter_var($loginValue, FILTER_VALIDATE_EMAIL) ? 'email': 'phone_number';
+        // merge value
+        request()->merge([$this->value => $loginValue]);
+        // return log in type
+        return property_exists($this, 'value') ? $this->value : 'email';
     }
 }
