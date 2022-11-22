@@ -22,7 +22,6 @@ class ProductsTableSeeder extends Seeder
         for ($i = 0; $i < 10; $i++) {
             Product::create([
                 'name' => $faker->sentence(2, true),
-                'image' => 'https://via.placeholder.com/150',
                 'description' => $faker->sentence(4, true),
             ]);
         }
