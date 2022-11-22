@@ -37,6 +37,7 @@
                         <td>{{ $user->phone_number }}</td>
                         <td class="text-center align-middle">
                             <div class="btn-group" role="group" aria-label="Second group">
+                                <a href="{{ route('admin.users.products.index', $user->id) }}" class="btn btn-sm btn-secondary"><i class="fa fa-eye"></i></a>
                                 <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
                                 <a href="javascript:void(0)" onclick="if (confirm('Are you sure to delete this user?') ) { document.getElementById('user-delete-{{ $user->id }}').submit(); } else { return false; }"  class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 <form action="{{ route('admin.users.destroy', $user->id) }}" method="post" id="user-delete-{{ $user->id }}">
