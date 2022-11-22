@@ -13,6 +13,11 @@
                     Products
                 </a>
 
+                <a class="nav-link {{ Route::currentRouteName() == 'admin.users.index' ? 'active' : '' }}" href="{{ route('admin.users.index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
+                    Users
+                </a>
+
             </div>
         </div>
         <div class="sb-sidenav-footer">
